@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Testing testing = new Testing();
-            Console.WriteLine("hello world");
+            
         }
     }
 }

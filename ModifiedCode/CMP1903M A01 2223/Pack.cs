@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
@@ -12,9 +13,11 @@ namespace CMP1903M_A01_2223
     {
         static Random _random = new Random();
         static List<Card> pack =  new List<Card>();
+        static int j;
        
         public Pack()
         {
+            j = 0;  
             //Initialise the card pack here
             for (int i = 1; i <= 4; i++) 
             {
@@ -48,25 +51,20 @@ namespace CMP1903M_A01_2223
 
             if (typeOfShuffle == 2)
             {
+                Random rand = new Random();
                 int half = pack.Count / 2;
                 List<Card> half1 = pack.GetRange(0, half);
                 List<Card> half2 = pack.GetRange(half, half);
-
                 List<Card> shuffled = new List<Card>();
-
 
                 while (half1.Count > 0 && half2.Count > 0)
                 {
-                    int numCards = _random.Next(1, 4);
-                    numCards = Math.Min(numCards, Math.Min(half1.Count, half2.Count));
-
-                    for (int i = 0; i < numCards; i++)
+                    if (rand.NextDouble() < 0.5)
                     {
                         shuffled.Add(half1[0]);
                         half1.RemoveAt(0);
                     }
-
-                    for (int i = 0; i < numCards; i++)
+                    else
                     {
                         shuffled.Add(half2[0]);
                         half2.RemoveAt(0);
@@ -84,8 +82,17 @@ namespace CMP1903M_A01_2223
                 }
 
                 pack = shuffled;
+                j += 1;
+                if (j != 5) 
+                {
+                    //Show();
+                    shuffleCardPack(2);
+                    //Console.WriteLine("test");
+                }
+                
                 return true;
-                //Show();
+
+                
             }
 
             if (typeOfShuffle == 3)

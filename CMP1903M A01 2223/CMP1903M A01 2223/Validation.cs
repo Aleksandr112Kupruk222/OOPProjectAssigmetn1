@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace CMP1903M_A01_2223
 {
     // Class for validating user input
-    internal class Validation
+    internal abstract class Validation
     {
         // Method to validate integer input within a given range
-        public int IntValidation(string message, int minRange, int maxRange)
+        protected int IntValidation(string message, int minRange, int maxRange)
         {
 
             int validInput;

@@ -49,16 +49,22 @@ namespace CMP1903M_A01_2223
               
             }
 
+
             if (typeOfShuffle == 2)
             {
+
                 Random rand = new Random();
+                // Divide the pack into two halves
                 int half = pack.Count / 2;
                 List<Card> half1 = pack.GetRange(0, half);
                 List<Card> half2 = pack.GetRange(half, half);
+                // Create new list to hold shuffled cards
                 List<Card> shuffled = new List<Card>();
 
+                // Loop while both halves still have cards
                 while (half1.Count > 0 && half2.Count > 0)
                 {
+                    // Randomly choose which half to draw from and add to shuffled list
                     if (rand.NextDouble() < 0.5)
                     {
                         shuffled.Add(half1[0]);
@@ -71,6 +77,7 @@ namespace CMP1903M_A01_2223
                     }
                 }
 
+                // If either half still has cards, add them to shuffled list
                 if (half1.Count > 0)
                 {
                     shuffled.AddRange(half1);
@@ -81,18 +88,15 @@ namespace CMP1903M_A01_2223
                     shuffled.AddRange(half2);
                 }
 
+
                 pack = shuffled;
                 j += 1;
-                if (j != 5) 
+                // Recursively call this function up to 5 times
+                if (j != 5)
                 {
-                    //Show();
                     shuffleCardPack(2);
-                    //Console.WriteLine("test");
                 }
-                
                 return true;
-
-                
             }
 
             if (typeOfShuffle == 3)
@@ -107,13 +111,6 @@ namespace CMP1903M_A01_2223
 
 
 
-        }
-        static void Show() 
-        {
-            foreach (Card card in pack)
-            {
-                card.show();
-            }
         }
         public static Card deal()
         {
